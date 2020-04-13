@@ -41,7 +41,7 @@ class _ContactFormState extends State<ContactForm> {
                   child: Text('Add contact'),
                   onPressed: () {
                     goToContactList(
-                        _nameController.text, _accountController.text);
+                        _nameController.text, int.tryParse(_accountController.text));
                   },
                 ),
               ),
@@ -52,8 +52,8 @@ class _ContactFormState extends State<ContactForm> {
     );
   }
 
-  void goToContactList(String name, String account) {
-    final Contact newContact = Contact(name, account);
+  void goToContactList(String name, int account) {
+    final Contact newContact = Contact(0, name, account);
     Navigator.pop(context, newContact);
   }
 }
