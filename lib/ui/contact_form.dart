@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bank/database/app_database.dart';
 import 'package:flutter_bank/model/contact_model.dart';
 
 class ContactForm extends StatefulWidget {
@@ -39,10 +40,7 @@ class _ContactFormState extends State<ContactForm> {
                 width: double.maxFinite,
                 child: RaisedButton(
                   child: Text('Add contact'),
-                  onPressed: () {
-                    goToContactList(
-                        _nameController.text, _accountController.text);
-                  },
+                  onPressed: () => saveContact(context),
                 ),
               ),
             )
@@ -52,8 +50,9 @@ class _ContactFormState extends State<ContactForm> {
     );
   }
 
-  void goToContactList(String name, String account) {
-    final Contact newContact = Contact(name, account);
-    Navigator.pop(context, newContact);
+  void saveContact(BuildContext context) {
+    final String name = _nameController.text;
+    final int account = int.tryParse(_accountController.text);
+    save(Contact(0, name, account)).then((id) => Navigator.pop(context));
   }
 }
