@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bank/core/navigationController.dart';
 import 'package:flutter_bank/ui/contacts_list.dart';
 
 class Dashboard extends StatelessWidget {
@@ -21,7 +20,9 @@ class Dashboard extends StatelessWidget {
               color: Theme.of(context).primaryColor,
               child: InkWell(
                 onTap: () {
-                  navigationTo(context, ContactsList());
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => ContactsList()),
+                  );
                 },
                 child: Container(
                   padding: EdgeInsets.all(16),
