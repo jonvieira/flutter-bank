@@ -11,7 +11,7 @@ class ContactsList extends StatelessWidget {
       appBar: AppBar(title: Text('Contacts')),
       body: FutureBuilder<List<Contact>>(
         initialData: List(),
-        future: Future.delayed(Duration(seconds: 2)).then((value) => findAll()),
+        future: findAll(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
@@ -29,9 +29,7 @@ class ContactsList extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          goToAddNewContact(context);
-        },
+        onPressed: () => goToAddNewContact(context),
         child: Icon(Icons.add),
       ),
     );
@@ -63,8 +61,7 @@ class ContactsList extends StatelessWidget {
 
   void goToAddNewContact(BuildContext context) {
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => ContactForm()))
-        .then((newContact) => debugPrint(newContact.toString()));
+        .push(MaterialPageRoute(builder: (context) => ContactForm()));
   }
 }
 
