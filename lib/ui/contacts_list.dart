@@ -1,17 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bank/database/app_database.dart';
+import 'package:flutter_bank/database/dao/contact_dao.dart';
 import 'package:flutter_bank/model/contact_model.dart';
 import 'package:flutter_bank/ui/contact_form.dart';
 
 class ContactsList extends StatelessWidget {
+  final ContactDao dao = ContactDao();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Contacts')),
       body: FutureBuilder<List<Contact>>(
         initialData: List(),
-        future: findAll(),
+        future: dao.findAll(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
